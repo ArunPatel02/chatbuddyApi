@@ -33,11 +33,11 @@ app.get("/", (req: Request, res: Response) => {
   console.log(Expo.isExpoPushToken("Exponen"))
   expo.sendPushNotificationsAsync([
     {
-      to : "ExponentPushToken[DdSTn7MdHsKgOe-rslZDAJ]",
-      title : "Arun Patel",
-      body : "testing the server aaa",
-      channelId : "default",
-      data : {"screen" : "friendrequest"}
+      to: "ExponentPushToken[DdSTn7MdHsKgOe-rslZDAJ]",
+      title: "Arun Patel",
+      body: "testing the server aaa",
+      channelId: "default",
+      data: { "screen": "friendrequest" }
     }
   ])
   res.json({ msg: "Express + TypeScript Server" });
@@ -72,7 +72,7 @@ io.on("connection", async (socket: Socket) => {
     const user = await User.findOne({ socketId: socket.id })
     if (user) {
       const updateUser = await User.findByIdAndUpdate(user._id, { socketId: "", isOnline: false, lastSeen: new Date() })
-      socket.broadcast.emit("userOffline", { userId: updateUser?._id, lastSeen: new Date(), isOnline: false });
+      socket.broadcast.emit("userOffline", JSON.stringify({ userId: updateUser?._id, lastSeen: new Date(), isOnline: false }));
     }
   });
 });

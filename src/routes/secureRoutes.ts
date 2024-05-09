@@ -1,5 +1,5 @@
 import express from "express";
-import { checkOtp, getFriendUserById, getUserById, updateUser } from "../controlers/user";
+import { checkOtp, getFriendUserById, getUserById, logoutUser, updateUser } from "../controlers/user";
 import { acceptFriendRequest, createFriendRequest, getFriendList, getFriendRequests, getUsersToSendFriendRequest, rejectFriendRequest } from "../controlers/friendRequest";
 import { getMessages, markMessagesAsRead, sendMessage } from "../controlers/messages";
 import { getContact } from "../controlers/contact";
@@ -11,6 +11,9 @@ secureRoutes.post("/checkOtp", checkOtp)
 
 // Route to update user
 secureRoutes.post("/updateUser", updateUser)
+
+
+secureRoutes.get("/logout/:id", logoutUser)
 
 // Route to get user by ID
 secureRoutes.get("/getUser", getUserById)
